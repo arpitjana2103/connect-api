@@ -87,6 +87,7 @@ const logout = async function (req, res) {
 
         await redisClient.connect();
         await redisClient.set(token, 'true');
+        await redisClient.disconnect();
 
         return res.status(400).json({
             status: 'success',
