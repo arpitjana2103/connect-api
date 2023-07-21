@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {UserModel} = require('../Models/user.model.js');
-const {redis} = require('../redis.js');
+const {BlackListModel} = require('../Models/blacklist.model.js');
 
 const register = async function (req, res) {
     try {
@@ -85,7 +85,11 @@ const logout = async function (req, res) {
         const token = req.headers.authorization?.split(' ')[1];
         if (!token) throw new Error('Token not found');
 
-        await redis.set(token, 'true');
+        const exist = await BlackListModel.findOne({token: token});
+        if (!exist) {
+            const newToken = new BlackListModel({token: token});
+            await newToken.save();
+        }
 
         return res.status(400).json({
             status: 'success',
