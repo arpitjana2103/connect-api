@@ -7,4 +7,6 @@ const redis = new Redis({
     password: process.env.REDISPASSWORD,
     db: 0,
 });
+
+console.log(' process.env.REDISPORT : ' + process.env.REDISPORT);
 module.exports = {redis};
