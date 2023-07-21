@@ -1,9 +1,10 @@
-// const Redis = require('ioredis');
-// const redis = new Redis();
-// module.exports = {redis};
-
-const {createClient} = require('redis');
-const redisClient = createClient();
-redisClient.on('error', (err) => console.log('Redis Client Error ', err));
-
-module.exports = {redisClient};
+require('dotenv').config();
+const Redis = require('ioredis');
+const redis = new Redis({
+    port: process.env.REDISPORT,
+    host: process.env.REDISHOST,
+    username: process.env.REDISUSER,
+    password: process.env.REDISPASSWORD,
+    db: 0,
+});
+module.exports = {redis};

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {UserModel} = require('../Models/user.model.js');
-const {redisClient} = require('../redis.js');
+const {redis} = require('../redis.js');
 
 const register = async function (req, res) {
     try {
@@ -85,9 +85,7 @@ const logout = async function (req, res) {
         const token = req.headers.authorization?.split(' ')[1];
         if (!token) throw new Error('Token not found');
 
-        await redisClient.connect();
-        await redisClient.set(token, 'true');
-        await redisClient.disconnect();
+        await redis.set(token, 'true');
 
         return res.status(400).json({
             status: 'success',
