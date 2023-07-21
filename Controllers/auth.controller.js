@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {UserModel} = require('../Models/user.model.js');
@@ -58,10 +59,8 @@ const login = async function (req, res) {
                 const token = jwt.sign(
                     {
                         userID: user._id,
-                        userName: user.name,
-                        isAdmin: user.isAdmin,
                     },
-                    'masai',
+                    process.env.JWT_SEC,
                     {expiresIn: '3d'}
                 );
 
@@ -91,7 +90,7 @@ const logout = async function (req, res) {
             await newToken.save();
         }
 
-        return res.status(400).json({
+        return res.status(200).json({
             status: 'success',
             message: 'Logout Successfull',
         });

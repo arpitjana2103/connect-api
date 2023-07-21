@@ -4,7 +4,7 @@
     "description": "ecom rest api",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js"
+        "start": "nodemon index.js"
     },
     "author": "Arpit Jana",
     "license": "ISC",
@@ -15,7 +15,6 @@
         "ioredis": "^5.3.2",
         "jsonwebtoken": "^9.0.1",
         "mongoose": "^7.4.0",
-        "nodemon": "^3.0.1",
-        "redis": "^4.6.7"
+        "nodemon": "^3.0.1"
     }
 }
