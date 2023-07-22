@@ -34,10 +34,10 @@ const register = async function (req, res) {
                 user: newUser,
             });
         });
-    } catch (err) {
+    } catch (error) {
         return res.status(400).json({
             status: 'fail',
-            error: err.message,
+            error: error.message,
         });
     }
 };

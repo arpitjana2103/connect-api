@@ -70,6 +70,7 @@ const getUserbyEmail = async function (req, res) {
         });
     }
 };
+
 const searchUser = async function (req, res) {
     try {
         const user = await UserModel.findOne({email: req.params.email});

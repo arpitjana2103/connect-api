@@ -7,11 +7,11 @@ const ProductSchema = new mongoose.Schema({
     category: {type: String, required: true},
     color: {type: String, required: true},
     price: {
-        main: {type: Number, required: true},
-        discount: {type: Number, required: true},
+        mainPrice: {type: Number, required: true},
+        discountedPrice: {type: Number, required: true},
     },
-    discription: {type: String, required: true},
-    specification: {type: Object, required: true},
+    description: {type: String, required: true},
+    specifications: {type: Object, required: true},
 });
 
 const ProductModel = mongoose.model('product', ProductSchema);
