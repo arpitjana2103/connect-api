@@ -54,8 +54,12 @@ const login = async function (req, res) {
                     error: err.message,
                 });
             }
-            if (!result) throw new Error('Wrong Password');
-            else {
+            if (!result) {
+                return res.status(400).json({
+                    status: 'fail',
+                    error: 'Wrong Password',
+                });
+            } else {
                 const token = jwt.sign(
                     {
                         userID: user._id,

@@ -179,29 +179,3 @@ module.exports = {
     getProductByID,
     getAllProducts,
 };
-
-/**
-// Working Routes
-
-// Authentication Route	
-	
-POST	  ${baseURL}/api/auth/registration	
-POST	  ${baseURL}/api/auth/login	
-GET	      ${baseURL}/api/auth/logout
-
-// Users Route
-
-GET 	  ${baseURL}/api/users/:email
-PATCH  	  ${baseURL}/api/users/:email
-DELETE    ${baseURL}/api/users/:email
-GET  	  ${baseURL}/api/search/users/:email
-GET 	  ${baseURL}/api/users/
-
-// Product Route	
-		
-POST      ${baseURL}/api/products/	
-PUT       ${baseURL}/api/products/:id	
-DELETE    ${baseURL}/api/products/:id	
-GET       ${baseURL}/api/products/:id	
-GET       ${baseURL}/api/products/ 	
- */
