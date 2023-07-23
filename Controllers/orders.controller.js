@@ -164,21 +164,40 @@ const getRevenue = async function (req, res) {
 
         if (isNaN(fromDateObj))
             throw new Error(
-                'Invalid Date Format.  Please use DD:MM:YYYY format.'
+                'Invalid Date Format. Please use DD:MM:YYYY format.'
             );
 
-        const orders = await OrderModel.find({
-            createdAt: {$gte: fromDateObj, $lte: new Date()},
-        });
+        const revenue = await OrderModel.aggregate([
+            {
+                $match: {
+                    createdAt: {$gte: fromDateObj, $lte: new Date()},
+                },
+            },
+            {
+                $group: {
+                    _id: null,
+                    totalRevenue: {$sum: '$totalPrice'},
+                },
+            },
+            {
+                $project: {
+                    _id: 0,
+                    revenue: '$totalRevenue',
+                },
+            },
+        ]);
 
-        const revenue = orders.reduce(
-            (total, order) => total + order.totalPrice,
-            0
-        );
+        // Check if there is any revenue data
+        if (revenue.length === 0) {
+            return res.status(200).json({
+                status: 'success',
+                revenue: 0,
+            });
+        }
 
         res.status(200).json({
             status: 'success',
-            revenue: revenue,
+            revenue: revenue[0].revenue,
         });
     } catch (error) {
         return res.status(400).json({

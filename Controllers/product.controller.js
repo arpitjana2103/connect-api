@@ -172,10 +172,53 @@ const getAllProducts = async function (req, res) {
     }
 };
 
+const bestProducts = async function (req, res) {
+    try {
+        const randomProducts = await ProductModel.aggregate([
+            {$sample: {size: 4}},
+        ]);
+
+        res.status(200).json({
+            status: 'success',
+            products: randomProducts,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            status: 'fail',
+            error: error.message,
+        });
+    }
+};
+
+const newProducts = async function (req, res) {
+    try {
+        const lastNewProducts = await ProductModel.aggregate([
+            {
+                $sort: {createdAt: -1},
+            },
+            {
+                $limit: 4,
+            },
+        ]);
+
+        res.status(200).json({
+            status: 'success',
+            products: lastNewProducts,
+        });
+    } catch (error) {
+        return res.status(400).json({
+            status: 'fail',
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
     addProduct,
     updateProduct,
     deleteProduct,
     getProductByID,
     getAllProducts,
+    bestProducts,
+    newProducts,
 };
