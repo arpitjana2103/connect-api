@@ -7,7 +7,7 @@ const {productRouter} = require('./Routes/product.routes.js');
 const {orderRouter} = require('./Routes/order.routes.js');
 
 const app = express();
-const PORT = process.env.PORT || 4500;
+const PORT = process.env.port || 4500;
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500');
