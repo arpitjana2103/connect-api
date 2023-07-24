@@ -49,7 +49,7 @@ function validateCartData(cartData) {
 
 const addCart = async function (req, res) {
     try {
-        const userEmail = req.params.email;
+        const userEmail = req.body.userEmail;
         const user = await UserModel.findOne({email: userEmail});
         if (!user) throw new Error('User not Found !');
 
