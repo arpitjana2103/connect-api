@@ -57,6 +57,7 @@ const addCart = async function (req, res) {
         if (invalidCart) {
             return res.status(400).json({
                 status: 'fail',
+                invalidCart: 'true',
                 error: invalidCart,
             });
         }
