@@ -125,9 +125,7 @@ const deleteOrder = async function (req, res) {
 const getOrderByEmail = async function (req, res) {
     try {
         const email = req.params.email;
-        const user = await UserModel.findOne({email: email});
-        if (!user) throw new Error('User Not Found !');
-        const order = await OrderModel.findOne({userID: user._id});
+        const order = await OrderModel.findOne({userEmail: email});
         return res.status(200).json({
             status: 'success',
             order: order,

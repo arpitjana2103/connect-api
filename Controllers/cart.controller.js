@@ -61,12 +61,7 @@ const addCart = async function (req, res) {
             });
         }
 
-        const newCartData = {
-            userID: user._id,
-            ...req.body,
-        };
-
-        const newCart = new CartModel(newCartData);
+        const newCart = new CartModel(req.body);
         await newCart.save();
         return res.status(200).json({
             status: 'success',
