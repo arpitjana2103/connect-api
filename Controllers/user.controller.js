@@ -5,7 +5,7 @@ const updateUser = async function (req, res) {
     try {
         if (req.body.decoded.userEmail !== req.params.email)
             throw new Error('Invalid EmailID !');
-
+            
         if (req.body.password) {
             bcrypt.hash(req.body.password, 5, function (err, hash) {
                 if (err) {
