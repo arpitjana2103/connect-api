@@ -5,8 +5,8 @@ function validateCartData(cartData) {
     const errors = {};
 
     // Check if required fields are missing or incorrect
-    if (!cartData.userID) {
-        errors.userID = 'User ID is required.';
+    if (!cartData.userEmail) {
+        errors.userEmail = 'User Email required';
     }
     if (
         !cartData.products ||
