@@ -53,14 +53,14 @@ const addCart = async function (req, res) {
         const user = await UserModel.findOne({email: userEmail});
         if (!user) throw new Error('User not Found !');
 
-        let invalidCart = validateCartData(req.body);
-        if (invalidCart) {
-            return res.status(400).json({
-                status: 'fail',
-                invalidCart: 'true',
-                error: invalidCart,
-            });
-        }
+        // let invalidCart = validateCartData(req.body);
+        // if (invalidCart) {
+        //     return res.status(400).json({
+        //         status: 'fail',
+        //         invalidCart: 'true',
+        //         error: invalidCart,
+        //     });
+        // }
 
         const newCart = new CartModel(req.body);
         await newCart.save();
