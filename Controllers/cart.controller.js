@@ -100,7 +100,7 @@ const updateCart = async function (req, res) {
 const getCart = async function (req, res) {
     try {
         const userEmail = req.params.email;
-        const user = await UserModel.find({email: userEmail});
+        const user = await UserModel.findOne({email: userEmail});
         if (!user) throw new Error('User not Found !');
 
         const cart = await CartModel.find({userEmail: user.email});
